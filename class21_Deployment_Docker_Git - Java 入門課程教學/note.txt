@@ -1,0 +1,52 @@
+### 部署、Docker 與 Git 筆記
+
+當應用程式開發完成後，最後一步就是將它「部署」(Deploy) 到伺服器上，讓使用者可以真正地使用它。這個過程涉及了打包、環境設定、版本控制等議題。
+
+#### 1. Git - 版本控制系統
+
+Git 是一個分散式的版本控制系統，是現代軟體開發的基石。
+
+- **核心概念**：
+  - **Repository (倉庫)**：你的專案資料夾，包含所有檔案和它們的修改歷史。
+  - **Commit (提交)**：將你目前的程式碼變更儲存到歷史紀錄中，每一次 commit 都是一個版本快照。
+  - **Branch (分支)**：允許你從主線 (通常是 `main` 或 `master`) 分出一個獨立的開發線，進行新功能開發或 Bug 修復，完成後再合併 (Merge) 回主線。這能確保主線的穩定性。
+  - **Remote (遠端)**：你的程式碼倉庫在網路上的副本，例如 GitHub, GitLab。方便團隊協作和備份。
+- **常用指令**：
+  - `git init`：在目前資料夾建立一個新的 Git 倉庫。
+  - `git add <file>`：將檔案的變更加入到「暫存區」(Staging Area)。
+  - `git commit -m "message"`：將暫存區的內容提交到倉庫。
+  - `git push`：將本地的 commit 推送到遠端倉庫。
+  - `git pull`：從遠端倉庫拉取最新的變更。
+  - `git branch <name>`：建立一個新分支。
+  - `git checkout <name>`：切換到指定分支。
+
+#### 2. Docker - 容器化技術
+
+Docker 是一種容器化平台，可以將你的「應用程式」連同它的「所有執行環境」（包含作業系統、函式庫、設定檔等）一起打包成一個標準化的「容器」(Container)。
+
+- **優點**：
+  - **環境一致性**：「在我電腦上可以跑」的問題從此消失。開發、測試、生產環境完全一致。
+  - **快速部署**：容器的啟動非常快，通常在秒級。
+  - **隔離性**：每個容器都運行在獨立的沙箱環境中，互不影響。
+  - **可攜性**：Docker 容器可以運行在任何支援 Docker 的機器上 (Windows, macOS, Linux, Cloud)。
+
+- **核心概念**：
+  - **Dockerfile**：一個純文字檔，用來定義如何建立一個 Docker 映像 (Image)。裡面包含了一系列的指令，例如：基於哪個作業系統、複製哪些檔案、安裝哪些軟體、執行什麼指令。
+  - **Image (映像)**：一個唯讀的模板，包含了應用程式和其執行環境。你可以把它想像成一個類別 (Class)。
+  - **Container (容器)**：Image 的一個可執行的實例。你可以把它想像成一個物件 (Object)。
+
+#### 3. 將 Spring Boot 應用程式 Docker 化
+
+1.  **打包應用程式**：執行 `mvn package`，將 Spring Boot 應用程式打包成一個可執行的 JAR 檔。
+2.  **撰寫 Dockerfile**：建立一個 `Dockerfile` 檔案，內容通常包含：
+    - `FROM openjdk:11-jre-slim`：選擇一個包含 Java 執行環境的基礎映像。
+    - `COPY target/*.jar app.jar`：將打包好的 JAR 檔複製到映像中。
+    - `ENTRYPOINT ["java", "-jar", "/app.jar"]`：設定容器啟動時要執行的指令。
+3.  **建立 Image**：執行 `docker build -t <image-name> .` 來根據 Dockerfile 建立映像。
+4.  **執行 Container**：執行 `docker run -p 8080:8080 <image-name>` 來啟動容器，並將容器的 8080 連接埠對應到主機的 8080 連接埠。
+
+---
+
+### 範例重點
+
+- 這堂課的範例將會提供一個簡單的 `Dockerfile`，用來將 `class18` 的 RESTful API 應用程式打包成 Docker Image。

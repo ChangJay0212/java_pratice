@@ -1,0 +1,44 @@
+### Java 測試與除錯筆記
+
+測試是確保軟體品質、減少 Bug、提升程式碼穩定性的關鍵環節。除錯則是在問題發生時，找出根本原因並加以修復的過程。
+
+#### 1. 測試 (Testing)
+
+- **單元測試 (Unit Testing)**
+  - **定義**：針對程式中最小的可測試單元（通常是一個方法或一個類別）進行的測試。
+  - **目的**：驗證該單元在各種輸入下，是否都能產生預期的輸出，並且行為正確。
+  - **框架**：JUnit 是 Java 中最流行的單元測試框架。
+  - **核心 Annotation**：
+    - `@Test`：標示這是一個測試方法。
+    - `@BeforeEach`：在每個 `@Test` 方法執行「前」執行。
+    - `@AfterEach`：在每個 `@Test` 方法執行「後」執行。
+    - `@BeforeAll`：在所有測試方法執行「前」執行一次（靜態方法）。
+    - `@AfterAll`：在所有測試方法執行「後」執行一次（靜態方法）。
+  - **斷言 (Assertions)**：使用 `Assertions` 類別的方法（如 `assertEquals`, `assertTrue`, `assertNotNull`）來驗證結果是否符合預期。
+
+- **整合測試 (Integration Testing)**
+  - **定義**：將多個單元（例如：Controller, Service, Repository）組合起來，測試它們之間協同工作是否正常。
+  - **在 Spring Boot 中**：通常會使用 `@SpringBootTest` 來啟動一個完整的 Spring 應用程式環境，並搭配 `MockMvc` 來對 API Endpoint 進行模擬請求與驗證。
+
+#### 2. 除錯 (Debugging)
+
+- **日誌 (Logging)**
+  - **目的**：在程式執行過程中，將關鍵資訊（如變數值、執行流程）輸出到 Console 或檔案中。
+  - **框架**：SLF4J (Simple Logging Facade for Java) 是 Java 中常用的日誌門面，底層可以搭配 Logback, Log4j2 等實作。
+  - **優點**：比 `System.out.println` 更強大，可以設定不同的日誌級別 (TRACE, DEBUG, INFO, WARN, ERROR)，並且可以彈性地控制輸出的格式與位置。
+
+- **除錯器 (Debugger)**
+  - **目的**：允許你在程式執行時，暫停在某個特定的點（中斷點, Breakpoint），並檢查當前的變數狀態、呼叫堆疊 (Call Stack) 等。
+  - **功能**：
+    - **Step Over**：執行目前行，並移動到下一行（如果目前行是方法呼叫，不會進入方法內部）。
+    - **Step Into**：如果目前行是方法呼叫，則進入該方法的內部。
+    - **Step Out**：從目前的方法中跳出，回到呼叫它的地方。
+    - **Resume Program**：繼續執行程式，直到下一個中斷點或程式結束。
+  - **IDE 整合**：所有主流的 IDE (Eclipse, IntelliJ IDEA, VS Code) 都內建了強大的圖形化除錯器。
+
+---
+
+### 範例重點
+
+- 這堂課的範例將會基於 `class19` 的專案，為 `UserController` 撰寫單元測試與整合測試。
+- 測試程式碼會放在 `src/test/java` 路徑下。

@@ -1,0 +1,9 @@
+Java 後端建議學習路線圖
+
+1. Java 核心語言與 OOP 精通 (class1-13)
+2. 掌握 Collection、I/O、Exception、Thread (Collection done)
+3. Spring Boot RESTful API 開發入門
+4. 資料庫整合（JPA + MySQL/PostgreSQL）
+5. 學會測試與除錯
+6. 學習部署：Docker + Git
+7. 模擬專案實作：Todo App、Blog 系統、線上商店 API

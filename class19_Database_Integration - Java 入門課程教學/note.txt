@@ -1,0 +1,35 @@
+### Spring Boot 資料庫整合筆記 (JPA + H2)
+
+在現代的應用程式中，將資料永久儲存在資料庫中是不可或缺的一環。Spring Boot 提供了強大的支援，讓我們可以輕易地與各種資料庫進行整合。
+
+#### 1. Spring Data JPA
+
+JPA (Java Persistence API) 是一套 Java 官方的 ORM (Object-Relational Mapping) 規範。它讓我們可以用「操作物件」的方式來「操作資料庫表格」，而不需要撰寫繁瑣的 SQL 語法。
+
+Spring Data JPA 則是 Spring 基於 JPA 規範所開發的框架，它進一步簡化了資料存取層 (Data Access Layer) 的開發。
+
+- **核心概念：Repository**
+  - 你只需要定義一個介面 (Interface)，並繼承 `JpaRepository`。
+  - Spring Data JPA 會在執行時期「自動」為你實作出這個介面的所有 CRUD (Create, Read, Update, Delete) 方法。
+  - 你還可以透過「方法命名規則」來定義更複雜的查詢，例如 `findByName(String name)`，Spring Data JPA 會自動為你生成對應的 SQL 查詢。
+
+#### 2. H2 Database (記憶體資料庫)
+
+H2 是一個輕量級的 Java SQL 資料庫，它可以被設定為「記憶體模式」(In-Memory)，這代表：
+- **速度快**：所有資料都儲存在記憶體中，讀寫速度極快。
+- **免安裝**：不需要額外安裝資料庫伺服器，非常適合開發和測試階段使用。
+- **生命週期**：當應用程式關閉時，所有資料都會消失。
+
+#### 3. 整合步驟
+
+1.  **加入相依套件**：在 `pom.xml` 中加入 `spring-boot-starter-data-jpa` 和 `h2` 的 starter。
+2.  **設定 `application.properties`**：設定 H2 資料庫的連線資訊，例如啟用 H2 Console，讓我們可以在網頁上直接操作資料庫。
+3.  **建立實體 (Entity)**：建立一個 Java 類別來對應資料庫的表格，並使用 `@Entity`、`@Id`、`@GeneratedValue` 等 Annotation 來標示。
+4.  **建立 Repository 介面**：建立一個介面並繼承 `JpaRepository`。
+5.  **在 Controller 中使用 Repository**：透過 `@Autowired` 將 Repository 注入到 Controller 中，就可以直接使用它來操作資料庫了。
+
+---
+
+### 專案結構與範例
+
+這堂課的範例會基於 `class18` 的結構進行擴充，加入 Entity、Repository 和新的 API。

@@ -1,0 +1,37 @@
+### Java Exception (例外處理) 筆記
+
+在程式執行期間，可能會發生非預期的錯誤，例如：使用者輸入無效資料、嘗試開啟不存在的檔案、網路連線中斷等。在 Java 中，這些錯誤被稱為「例外」(Exception)。
+
+#### 1. 為什麼需要例外處理？
+
+- **避免程式崩潰**：若不處理例外，程式遇到錯誤時會立即終止，使用者體驗不佳。
+- **分離正常與錯誤處理邏輯**：讓主程式碼專注於正常流程，錯誤處理則集中在特定的區塊，使程式碼更清晰。
+- **提供錯誤資訊**：可以捕獲詳細的錯誤資訊，方便除錯或提示使用者。
+
+#### 2. `try-catch-finally` 語法
+
+這是 Java 例外處理的核心機制。
+
+- **`try`**：將可能發生例外的程式碼包在 `try` 區塊中。
+- **`catch`**：當 `try` 區塊中發生特定類型的例外時，對應的 `catch` 區塊會被執行。可以有多個 `catch` 來處理不同類型的例外。
+- **`finally`**：無論例外是否發生，`finally` 區塊中的程式碼「永遠會」被執行。通常用於釋放資源（如關閉檔案流、資料庫連線）。
+
+#### 3. `throws` 與 `throw`
+
+- **`throws`**：用在方法簽章上，表示這個方法「可能拋出」某種類型的例外，但它自己不處理，而是交由呼叫它的上層方法去處理。
+- **`throw`**：用在方法內部，主動「拋出一個」例外的實例。通常用於自訂錯誤條件。
+
+#### 4. 常見的 Exception 類型
+
+- **`Checked Exception` (受檢例外)**：編譯器 (Compiler) 會強制你必須處理的例外（使用 `try-catch` 或 `throws`）。通常是可預期且可恢復的外部錯誤，例如 `IOException`、`SQLException`。
+- **`Unchecked Exception` (非受檢例外 / RuntimeException)**：編譯器不會強制處理，通常是程式邏輯錯誤 (Bug) 造成的，例如 `NullPointerException`、`ArrayIndexOutOfBoundsException`。
+
+---
+
+### 範例重點
+
+- `App.java` 程式碼將會示範：
+  1. 使用 `try-catch` 處理陣列索引越界的 `ArrayIndexOutOfBoundsException`。
+  2. 使用 `finally` 區塊確保無論如何都會執行的程式碼。
+  3. 示範一個方法使用 `throws` 宣告可能拋出的例外。
+  4. 在方法中主動使用 `throw` 拋出一個 `IllegalArgumentException`。

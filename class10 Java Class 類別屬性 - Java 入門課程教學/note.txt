@@ -1,0 +1,73 @@
+1. 類別的組成
+    包含屬性和方法
+    ex:
+        class 類別名稱一{
+            //類別屬性
+            static int x=3;
+            public static void main(String[] args){
+                System.out.printIn(類別名稱一.x);
+                System.out.printIn(類別名稱二.x);
+                類別名稱二.text = "Hello Class"
+                System.out.printIn(類別名稱二.text);
+            }
+
+
+        }
+        class 類別名稱二{
+            //類別屬姓
+            static String text="Hello";
+            static float x=8.7;
+            
+            }
+    1.1 進階
+        | 關鍵字    | 功能類別  | 用途與說明                      |
+        | -------- | ----- | -------------------------- |
+        | `static` | 類別層級  | 屬性或方法屬於「類別本身」，而非實例（所有物件共用） |
+        | `final`  | 不可變屬性 | 表示變數值不可更改、方法不可被覆寫、類別不可被繼承  |
+        | `this`   | 物件指標  | 代表「當前物件的實體」，用於區分成員變數與參數    |
+        | `super`  | 繼承關係  | 表示「父類別」的屬性或方法，可用於存取父類的內容   |
+        
+        1.1.1 static — 類別共用變數或方法
+        class MyClass {
+            static int count = 0; // 所有物件共用
+
+            static void printCount() {
+                System.out.println("Count = " + count);
+            }
+        }
+
+        1.1.2 final — 宣告常數 / 限制覆寫
+
+        final class CannotExtend {}  // 不能被繼承
+
+        class MyClass {
+            final int MAX = 10; // 不能更改
+            final void show() {  // 子類不能 override
+                System.out.println("Final method");
+            }
+        }
+
+        1.1.3 this — 指向當前物件（用來解決變數名稱衝突）
+
+        class Person {
+            String name;
+
+            Person(String name) {
+                this.name = name; // 區分參數 name 與成員變數 name
+            }
+        }
+
+        1.1.4 super — 呼叫父類別的建構子或方法
+
+        class Animal {
+            void speak() {
+                System.out.println("Animal sound");
+            }
+        }
+
+        class Dog extends Animal {
+            void speak() {
+                super.speak(); // 呼叫父類別的方法
+                System.out.println("Dog barks");
+            }
+        }

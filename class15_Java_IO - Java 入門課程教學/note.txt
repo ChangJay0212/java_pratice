@@ -1,0 +1,33 @@
+### Java I/O (Input/Output) 筆記
+
+Java 的 I/O 操作是基於「流」(Stream) 的概念，用來處理資料的輸入與輸出。
+
+#### 1. Stream 的分類
+
+- **方向**：
+  - **Input Stream (輸入流)**：從資料來源（如檔案、網路）讀取資料。
+  - **Output Stream (輸出流)**：將資料寫入到目的地。
+
+- **處理單位**：
+  - **Byte Stream**：以位元組 (byte) 為單位處理資料，適合處理任何類型的檔案（如圖片、影片、二進位檔）。
+    - `InputStream` / `OutputStream` 是所有位元組流的抽象父類別。
+    - `FileInputStream` / `FileOutputStream` 是常用的檔案位元組流。
+  - **Character Stream**：以字元 (character) 為單位處理資料，專門用來處理純文字檔案，會自動處理字元編碼。
+    - `Reader` / `Writer` 是所有字元流的抽象父類別。
+    - `FileReader` / `FileWriter` 是常用的檔案字元流。
+
+#### 2. 常用的 I/O Class
+
+- **FileInputStream / FileOutputStream**: 用於讀寫檔案的位元組流。
+- **FileReader / FileWriter**: 用於讀寫檔案的字元流，處理純文字時更方便。
+- **BufferedReader / BufferedWriter**: 提供緩衝功能，可以一次讀寫一行文字 (`readLine()`, `newLine()`)，能顯著提升 I/O 效能。
+- **try-with-resources**: Java 7 之後的語法，可以自動關閉 `Closeable` 資源（如各種 Stream），讓程式碼更簡潔且能避免資源洩漏。
+
+---
+
+### 範例重點
+
+- `App.java` 程式碼將會示範：
+  1. 使用 `FileWriter` 和 `BufferedWriter` 將文字寫入新檔案 `output.txt`。
+  2. 使用 `FileReader` 和 `BufferedReader` 從 `output.txt` 讀取內容並印在 Console。
+  3. 使用 `try-with-resources` 語法確保檔案流能被自動關閉。

@@ -1,0 +1,44 @@
+1. Java是強型別語言。 (型態和賦值須一致。)
+2. 浮點數型態大小皆大於整數型態 ex 
+    整數 : byte < short < int < long
+    浮點數 : float < double
+3. 基本轉換規則
+    3.1 小範圍轉為大範圍 : 自動轉換
+        byte n1 = 3
+        int n2 = n1
+        long n3 = 55555555
+        float n4 = n3
+    3.2 大範圍轉小範圍 : 轉換錯誤
+        int n1 = 3
+        byte n2 = n1 // 錯誤
+        double n3 = 3.5
+        float n4 = n3 // 錯誤
+        float n5 = 10.5 // 錯誤
+        3.2.1 大範圍轉小範圍 (使用 "資料型態" 強制轉換) : 轉換後可能會產生數字失真
+            int n1 = 3
+            byte n2 = (byte)n1;
+            int n3 = 1024 
+            byte n4 = (byte)n3 // 數字和原先不同
+            double n5 =3.1415926536
+            float n6 = (float)n5 // 數字失去精準度
+    3.3 字串 : 可以和數字資料型態做轉換
+        3.3.1 數字轉字串
+            String x = "345"
+            3.3.1.1 轉成 int
+                String s = "56"
+                int x = Integer.parseInt(s);
+            3.3.1.2 轉成 long
+                long x = Long.parseLong(s);
+            3.3.1.3 轉成 float
+                float x = Float.parseFloat(s);
+            3.3.1.4 轉成 double
+                double x = Double.parseDouble(s);
+            3.3.1.5 不能轉為數字的字串
+                String m = "Hello World"
+        3.3.2 數字轉字串
+            int x = 3
+            String s1 = String.valueOf(x)
+            String s1 = String.valueOf(1024L)
+            String s1 = String.valueOf(3.14F)
+            double y = 3.1415926256
+            String s4 = String.valueOf(y)

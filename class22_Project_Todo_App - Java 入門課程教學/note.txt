@@ -1,0 +1,52 @@
+### 模擬專案實作：Todo App 後端 API
+
+這個專案的目標是建立一個功能完整的待辦事項 (Todo) 清單的後端 RESTful API。我們將會應用前面課程學到的所有知識，包含：
+
+- **Spring Boot**：作為應用程式的基礎框架。
+- **Spring Data JPA**：用來操作資料庫。
+- **H2 Database**：作為開發階段的記憶體資料庫。
+- **RESTful API 設計**：設計符合 REST 風格的 API Endpoints。
+- **Maven**：用來管理專案的相依套件。
+
+#### 專案功能需求
+
+一個待辦事項 (Todo) 應該包含以下資訊：
+- `id` (Long): 唯一識別碼。
+- `title` (String): 待辦事項的標題。
+- `completed` (boolean): 是否已完成。
+
+我們需要實作出以下 API：
+
+1.  `POST /todos`
+    - **功能**：新增一筆待辦事項。
+    - **Request Body**：`{ "title": "新的待辦事項" }`
+    - **Response**：新增後的待辦事項物件。
+
+2.  `GET /todos`
+    - **功能**：取得所有的待辦事項。
+    - **Response**：一個包含所有待辦事項的陣列。
+
+3.  `GET /todos/{id}`
+    - **功能**：根據 ID 取得單一筆待辦事項。
+    - **Response**：對應的待辦事項物件，如果找不到則回傳 404 Not Found。
+
+4.  `PUT /todos/{id}`
+    - **功能**：根據 ID 更新一筆待辦事項（通常用來更新標題或完成狀態）。
+    - **Request Body**：`{ "title": "更新後的標題", "completed": true }`
+    - **Response**：更新後的待辦事項物件。
+
+5.  `DELETE /todos/{id}`
+    - **功能**：根據 ID 刪除一筆待辦事項。
+    - **Response**：200 OK，沒有內容。
+
+#### 專案結構
+
+我們將會建立以下的類別：
+- `Todo.java`: JPA 實體 (Entity)。
+- `TodoRepository.java`: Spring Data JPA Repository。
+- `TodoController.java`: 處理所有 HTTP 請求的控制器。
+- `TodoApplication.java`: Spring Boot 主應用程式。
+
+---
+
+這個專案將會是一個麻雀雖小、五臟俱全的完整後端應用程式，可以很好地總結我們所學的知識。

@@ -1,0 +1,25 @@
+1. if 判斷式
+    if ( 布林值 ) {
+
+    }else if( 布林值 ) {
+
+    }else {
+
+    }
+2. switch 判斷式
+    switch (變數名稱) {
+        case 比對的資料:
+            break;
+        case 比對的資料:
+            break;
+        default:
+            break;
+    }
+
+3.標準輸入 : 讓使用者從終端機輸入資料
+    3.1 載入內建的java.util.Scanner類別
+        import java.util.Scanner;
+    3.2 範例
+        Scanner s = new Scanner(System.in)
+        int x = s.nextInt()
+        String text = s.next()

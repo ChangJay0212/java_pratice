@@ -1,0 +1,5 @@
+1. 你需要安裝 jdk : https://www.oracle.com/tw/java/technologies/downloads/
+2. 利用`javac {File name}` 去做編譯
+3. 利用`java {編譯檔} 去做執行
+
+reference : https://www.youtube.com/watch?v=7GUAbtbLk5s&list=PL-g0fdC5RMbrKf_Co3mvz6YFbs9QOPvTf

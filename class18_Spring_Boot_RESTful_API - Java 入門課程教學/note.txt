@@ -1,0 +1,37 @@
+### Spring Boot RESTful API 開發入門筆記
+
+Spring Boot 是一個由 Pivotal 團隊提供的全新框架，其設計目的是用來簡化 Spring 應用程式的初始設定與開發過程。
+
+#### 1. 什麼是 Spring Boot？
+
+- **自動設定 (Auto-configuration)**：Spring Boot 會根據你加入的相依套件（例如 `spring-boot-starter-web`），自動設定好大部分需要的 Bean，大幅減少手動設定的麻煩。
+- **內嵌伺服器 (Embedded Server)**：內建 Tomcat、Jetty 或 Undertow 等伺服器，不需要額外安裝和設定，可以直接將應用程式打包成一個可執行的 JAR 檔並執行。
+- **提供 "Starters"**：提供一系列的 "starter" 相依套件，簡化了 Maven/Gradle 的設定。例如，`spring-boot-starter-web` 就包含了開發 Web 應用程式所需的一切，包含 RESTful、Spring MVC 和 Tomcat。
+
+#### 2. 核心概念：RESTful API
+
+REST (Representational State Transfer) 是一種軟體架構風格，不是一個標準。一個符合 REST 風格的 API 就稱為 RESTful API。
+
+- **資源 (Resource)**：API 的核心是資源，例如：使用者、訂單、產品。每個資源都由一個唯一的 URI (Uniform Resource Identifier) 來標識，例如 `/users`、`/orders/123`。
+- **HTTP 方法 (HTTP Methods)**：使用標準的 HTTP 方法來對資源進行操作：
+  - `GET`：讀取資源。
+  - `POST`：新增資源。
+  - `PUT`：更新整個資源。
+  - `PATCH`：更新部分資源。
+  - `DELETE`：刪除資源。
+- **Stateless (無狀態)**：伺服器不保存客戶端的狀態。每一次的請求都必須包含所有必要的資訊。
+
+#### 3. Spring Boot 中的主要 Annotation
+
+- **`@SpringBootApplication`**: 一個複合的 Annotation，包含了 `@Configuration`, `@EnableAutoConfiguration`, `@ComponentScan`。通常用在主類別上。
+- **`@RestController`**: 標示一個類別為控制器 (Controller)，並且類別中所有方法的返回值都會被自動轉換為 JSON 格式。它是 `@Controller` 和 `@ResponseBody` 的結合。
+- **`@RequestMapping("/path")`**: 將 HTTP 請求對應到處理方法上。可以指定路徑和 HTTP 方法。
+- **`@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`**: `@RequestMapping` 的變體，讓程式碼更具可讀性。
+- **`@PathVariable`**: 從 URL 路徑中獲取變數，例如 `/users/{id}`。
+- **`@RequestParam`**: 從 URL 的查詢參數中獲取值，例如 `/search?keyword=java`。
+
+---
+
+### 專案結構與範例
+
+Spring Boot 專案通常遵循 Maven 的標準目錄結構。接下來的範例程式碼會需要一個特定的資料夾結構才能正確編譯和執行。

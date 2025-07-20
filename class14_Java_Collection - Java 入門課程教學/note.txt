@@ -1,0 +1,20 @@
+# Java 集合 (Collection)
+
+Java 集合框架 (Java Collections Framework) 提供了一套高效能、標準化的介面與類別，用於儲存和操作物件群組。
+
+## 核心介面
+
+- **Collection**: 集合框架的根介面，定義了所有集合的基本操作，如 `add()`, `remove()`, `contains()`, `size()`。
+- **List**: 有序的集合，允許重複的元素。可以透過索引存取元素。
+    - **ArrayList**: 基於動態陣列實現，隨機存取速度快。
+    - **LinkedList**: 基於雙向鏈結串列實現，新增和刪除元素速度快。
+- **Set**: 不包含重複元素的集合。
+    - **HashSet**: 基於雜湊表實現，提供高效能的元素操作，但不保證順序。
+    - **TreeSet**: 基於紅黑樹實現，元素會自動排序。
+- **Map**: 儲存鍵值對 (key-value pair) 的集合，鍵是唯一的。
+    - **HashMap**: 基於雜湊表實現，提供高效能的鍵值對操作，但不保證順序。
+    - **TreeMap**: 基於紅黑樹實現，鍵會自動排序。
+
+## 範例程式碼 (`App.java`)
+
+這個範例將會示範如何使用 `ArrayList`, `HashSet`, 和 `HashMap`。

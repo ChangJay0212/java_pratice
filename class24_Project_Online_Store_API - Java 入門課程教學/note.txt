@@ -1,0 +1,47 @@
+### 模擬專案實作：線上商店後端 API
+
+這是我們最終的專案，目標是建立一個線上商店的後端 API，處理產品、顧客下單等核心功能。這個專案將會展示如何處理更複雜的「多對多」關聯性。
+
+#### 專案功能需求
+
+- **產品 (Product)**
+  - `id` (Long)
+  - `name` (String)
+  - `price` (double)
+
+- **訂單 (Order)**
+  - `id` (Long)
+  - `customerName` (String)
+  - `orderDate` (LocalDateTime)
+  - `totalAmount` (double): 訂單總金額
+  - `items` (List<OrderItem>): 訂單包含的項目
+
+- **訂單項目 (OrderItem)** - **這是一個「關聯實體」(Join Entity)**
+  - `id` (Long)
+  - `order` (Order): 關聯到所屬的訂單
+  - `product` (Product): 關聯到購買的產品
+  - `quantity` (int): 購買數量
+  - `price` (double): 購買時的單價 (為了記錄歷史價格)
+
+**API Endpoints:**
+
+1.  **產品相關 (Products)**
+    - `POST /products`: 新增產品。
+    - `GET /products`: 取得所有產品。
+
+2.  **訂單相關 (Orders)**
+    - `POST /orders`: 建立一張新訂單。這是最核心的商業邏輯。
+      - **Request Body**: `{ "customerName": "Gemini", "items": [ { "productId": 1, "quantity": 2 }, { "productId": 3, "quantity": 1 } ] }`
+      - **後端處理**: 後端需要根據 `productId` 找到對應的產品，計算總金額，然後建立 `Order` 和 `OrderItem` 並存入資料庫。
+    - `GET /orders`: 取得所有訂單。
+    - `GET /orders/{orderId}`: 取得單一訂單的詳細資訊（包含所有訂單項目和產品資訊）。
+
+#### 核心技術點
+
+- **多對多關聯 (Many-to-Many)**: 一張訂單可以包含多種產品，一種產品也可以出現在多張訂單中。我們透過建立一個中間的「關聯實體」`OrderItem` 來將這個多對多關聯拆解成兩個「一對多」關聯 (`Order` -> `OrderItem` and `Product` -> `OrderItem`)。
+- **服務層 (Service Layer)**: 對於像「建立訂單」這樣比較複雜的商業邏輯，通常會建立一個 `OrderService` 類別來處理，而不是直接在 `Controller` 中撰寫所有邏輯。這讓程式碼的職責更分明、更容易維護和測試。在這個入門專案中，為了簡化，我們還是會將主要邏輯放在 Controller 中。
+- **交易管理 (Transaction Management)**: Spring 的 `@Transactional` Annotation 能確保一個方法內的所有資料庫操作要麼全部成功，要麼全部失敗，這對於保證資料一致性至關重要（例如：建立訂單和更新庫存必須是原子操作）。
+
+---
+
+完成這個專案後，您將對如何使用 Spring Boot 開發一個真實世界的後端應用程式有非常扎實的理解。

@@ -1,0 +1,14 @@
+1. 類別方法的回傳值
+    1.1 方法名稱前面要定義回傳值資料型態
+        static 回傳值型態 方法名稱 ( 資料型態 名稱, ...){
+            return 回傳值型態
+        }
+    class 類別名稱{
+                public static void main(String[] args){
+                        int result = 類別名稱.add(1, 2);
+                        System.out.println(result); // 輸出 3
+                    }
+                static int add(int n1, int n2){
+                        return n1 + n2;
+                    }
+            }

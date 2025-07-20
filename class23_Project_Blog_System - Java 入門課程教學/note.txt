@@ -1,0 +1,42 @@
+### 模擬專案實作：Blog 系統後端 API
+
+這個專案將會比 Todo App 更複雜，我們會建立一個具備「文章 (Post)」和「留言 (Comment)」一對多關聯性的部落格系統後端 API。
+
+#### 專案功能需求
+
+- **文章 (Post)**
+  - `id` (Long)
+  - `title` (String)
+  - `content` (String)
+  - `createdAt` (LocalDateTime): 建立時間
+
+- **留言 (Comment)**
+  - `id` (Long)
+  - `content` (String)
+  - `createdAt` (LocalDateTime)
+  - `post` (Post): 關聯到所屬的文章
+
+**API Endpoints:**
+
+1.  **文章相關 (Posts)**
+    - `POST /posts`: 新增文章。
+    - `GET /posts`: 取得所有文章。
+    - `GET /posts/{postId}`: 取得單一文章（包含其所有留言）。
+    - `PUT /posts/{postId}`: 更新文章。
+    - `DELETE /posts/{postId}`: 刪除文章（應同時刪除其所有留言）。
+
+2.  **留言相關 (Comments)**
+    - `POST /posts/{postId}/comments`: 為某篇文章新增一則留言。
+    - `GET /posts/{postId}/comments`: 取得某篇文章的所有留言。
+    - `DELETE /comments/{commentId}`: 刪除某一則留言。
+
+#### 核心技術點
+
+- **`@OneToMany` / `@ManyToOne`**: 用來定義 JPA 實體之間的一對多/多對一關聯。
+- **`@JoinColumn`**: 指定關聯的外鍵欄位。
+- **`CascadeType.ALL`**: 設定級聯操作，例如刪除文章時，自動刪除其下的所有留言。
+- **DTO (Data Transfer Object)**: 在更複雜的應用中，我們會使用 DTO 來作為 API 的資料傳輸物件，避免直接暴露 JPA Entity，讓 API 的結構更穩定、更安全。但為了簡化這個入門專案，我們暫時還是會直接使用 Entity。
+
+---
+
+這個專案將會讓你更深入地理解 JPA 的關聯性對應以及如何設計更複雜的 RESTful API。
