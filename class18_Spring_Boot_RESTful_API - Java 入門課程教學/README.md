@@ -131,6 +131,40 @@ target/
 ├── test-classes/            <-- 測試用 class
 └── ...
 ```
+##### 改變port號
+1. 指令輸入
+    ```
+    mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8888
+    ```
+2. spring 架構
+    ```
+    src/
+    ├── main/                  
+    │   └── resources
+    │   │   ├── application.properties
+    │   │   └── application.yaml
+    └── ...
+    ```
+加上 `application.properties` 或 `application.yaml` 擇一就好（優先選擇 `application.properties`）
+- `application.properties`
+  ```
+  server.port=8888
+  ```
+- `application.yaml`
+  ```yaml
+  server:
+    port: 8888
+  ```
+
+3. 程式碼指定`設定檔位置` ❌ 不支援 .yaml 或 .yml
+    ```java
+      @SpringBootApplication
+      @PropertySource("classpath:config/custom.properties")
+    ```
+    或執行時指定
+    ```
+      java -jar app.jar --spring.config.location=classpath:/config/custom.properties
+    ```
 #### ✅ 若你想要執行 .jar 而不是直接 run：
 
 ##### 編譯並打包成 jar
