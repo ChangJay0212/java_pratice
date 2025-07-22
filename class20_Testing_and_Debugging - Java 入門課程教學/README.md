@@ -32,6 +32,34 @@
 - 使用 `@SpringBootTest` 啟動整個 Spring 應用程式。
 - 可搭配 `MockMvc` 模擬 HTTP 請求，測試 API 回應。
 
+##### ✅ MockMvcResultMatchers 對照表
+
+| 方法 | 功能說明 |
+|------|----------|
+| `status().isOk()` | 驗證回應狀態碼是否為 200 OK |
+| `status().isCreated()` | 驗證狀態碼是否為 201 Created |
+| `status().isNotFound()` | 驗證是否為 404 Not Found |
+| `status().isBadRequest()` | 驗證是否為 400 Bad Request |
+| `jsonPath("$.name").value("Jay")` | 驗證回應 JSON 中 name 欄位為 "Jay" |
+| `jsonPath("$.id").exists()` | 驗證 JSON 中是否有 id 欄位 |
+| `content().string("Hello World!")` | 驗證回應 body 為指定字串 |
+| `content().contentType("application/json")` | 驗證回應內容格式 |
+| `header().string("Content-Type", "application/json")` | 驗證 response header 是否為 JSON |
+| `redirectedUrl("/home")` | 驗證是否有重導至 `/home` |
+| `cookie().value("token", "abc123")` | 驗證 cookie 的值 |
+| `forwardedUrl("/error")` | 驗證是否 forward 到錯誤頁 |
+
+---
+
+## 🧪 使用範例
+
+```java
+mockMvc.perform(MockMvcRequestBuilders.get("/users/1"))
+       .andExpect(status().isOk())
+       .andExpect(content().contentType("application/json"))
+       .andExpect(jsonPath("$.name").value("Jay"));
+```
+
 ---
 
 #### 🐞 2. 除錯（Debugging）
