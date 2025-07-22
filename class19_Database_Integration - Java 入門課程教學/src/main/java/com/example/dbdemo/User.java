@@ -1,5 +1,5 @@
 package com.example.dbdemo;
-
+import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 // @Entity 標示這是一個 JPA 的實體類別，對應到資料庫中的一個表格
 @Entity
+@Table(name="users")
 public class User {
 
     // @Id 標示這是主鍵
