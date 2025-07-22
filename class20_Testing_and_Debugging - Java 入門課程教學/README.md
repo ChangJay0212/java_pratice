@@ -51,17 +51,6 @@
 
 ---
 
-## 🧪 使用範例
-
-```java
-mockMvc.perform(MockMvcRequestBuilders.get("/users/1"))
-       .andExpect(status().isOk())
-       .andExpect(content().contentType("application/json"))
-       .andExpect(jsonPath("$.name").value("Jay"));
-```
-
----
-
 #### 🐞 2. 除錯（Debugging）
 
 ##### 📋 日誌（Logging）
@@ -103,6 +92,55 @@ log.info("用戶 ID: {}", userId);
 - 將為 `UserController` 撰寫：
   - 單元測試：驗證 Repository / Service 方法邏輯
   - 整合測試：使用 `@SpringBootTest` 測試整個 API 行為
+
+---
+
+## 🧪 使用範例
+
+```java
+mockMvc.perform(MockMvcRequestBuilders.get("/users/1"))
+       .andExpect(status().isOk())
+       .andExpect(content().contentType("application/json"))
+       .andExpect(jsonPath("$.name").value("Jay"));
+```
+## 🚀 啟動測試
+##### ✅ 方式一：使用 IDE（如 IntelliJ IDEA / Eclipse）
+如果你是用 IntelliJ：
+
+找到 UserControllerTest.java
+
+點選類別左側的 ▶ 或方法名稱左側的 ▶
+
+選「Run」或「Debug」
+
+💡 這是最直覺、常用的方式。
+
+##### ✅ 方式二：使用 Maven 指令執行所有測試
+```
+mvn test
+```
+這會執行整個專案下的所有單元測試與整合測試（src/test/java）。
+
+##### ✅ 方式三：只執行某個類別的測試（推薦）
+```
+mvn -Dtest=UserControllerTest test
+```
+或只跑某個方法（舉例）：
+
+```
+mvn -Dtest=UserControllerTest#testCreateUser test
+```
+##### ✅ 方式四：Spring Boot 專案整合測試（推薦）
+  如果你想要搭配 Spring Boot 的全架構啟動做整合測試：
+
+  ```
+  mvn verify
+  ```
+  它會：
+
+  - 執行 compile
+
+  - 執行 test驗證所有測試是否通過
 
 ---
 
