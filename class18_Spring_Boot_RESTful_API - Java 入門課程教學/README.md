@@ -106,6 +106,43 @@ public class UserController {
 - 可透過 Postman 或瀏覽器測試 GET 請求，POST / PUT 建議用 Postman 模擬。
 
 ---
+#### 👉 Usage
+- [Introduce Maven](./MAVEN.md)
+```bash
+mvn spring-boot:run
+```
+mvn spring-boot:run 在執行時 會自動編譯你的原始碼並產生 .class 檔案到 target/classes 目錄下，但它不會產生 .jar 檔案（不像 mvn package 那樣）。
+
+以下是它背後的行為：
+
+##### 🔍 mvn spring-boot:run 做了什麼？
+編譯：相當於先執行 mvn compile，會把 src/main/java 下的程式碼編譯到 target/classes
+
+執行：啟動 Spring Boot 應用，類似執行 java -cp target/classes com.example.MainClass
+
+不產生 jar：它不會打包成 target/demo-0.0.1-SNAPSHOT.jar
+
+📁 執行完後 target 資料夾會長這樣（常見）
+```
+target/
+├── classes/                  <-- 編譯後的 class 放這
+│   └── com/example/App.class
+├── generated-sources/
+├── test-classes/            <-- 測試用 class
+└── ...
+```
+#### ✅ 若你想要執行 .jar 而不是直接 run：
+
+##### 編譯並打包成 jar
+```
+mvn clean package
+```
+
+##### 執行 jar
+```
+java -jar target/demo-0.0.1-SNAPSHOT.jar
+```
+
 ### 📎 More
 * [🏠 回主頁](../README.md)
 * [⏭️ class19_Database_Integration - Java 入門課程教學](../class19_Database_Integration%20-%20Java%20入門課程教學/README.md)
